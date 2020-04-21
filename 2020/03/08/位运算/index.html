@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-big-counter.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/home-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/home-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="位运算,位移运算," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言本文主要介绍在位运算和位移运算的基本概念，涉及到的编程语言为Java。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="位运算和位移运算">
+<meta property="og:url" content="http://yoursite.com/2020/03/08/%E4%BD%8D%E8%BF%90%E7%AE%97/index.html">
+<meta property="og:site_name" content="轩然阁">
+<meta property="og:description" content="前言本文主要介绍在位运算和位移运算的基本概念，涉及到的编程语言为Java。">
+<meta property="og:image" content="http://image.chanecho.com/api/img?path=/79/a24702bb65f3b59e8cf8eb06fc8ee5.png">
+<meta property="og:image" content="http://image.chanecho.com/api/img?path=/44/330dc90f95e612ac6d3d9d9beeae30.jpg">
+<meta property="og:image" content="http://image.chanecho.com/api/img?path=/33/c602251f35064521ba08ecdd6a8e24.png">
+<meta property="og:image" content="http://image.chanecho.com/api/img?path=/d2/d0c26fbbf62c445ab8ec4bdf432ab8.png">
+<meta property="og:image" content="http://image.chanecho.com/api/img?path=/7f/de5d570d5f23480884fb81470a39ec.png">
+<meta property="og:image" content="http://image.chanecho.com/api/img?path=/9e/a83858a939ba0ae6595b110bd67e4f.jpg">
+<meta property="og:image" content="http://image.chanecho.com/api/img?path=/c3/899c923900a0cac30c0e198d0dd689.jpg">
+<meta property="og:image" content="http://image.chanecho.com/api/img?path=/d4/3bdaad17c22ea952b93a3c056893f7.jpg">
+<meta property="og:image" content="http://image.chanecho.com/api/img?path=/9e/a83858a939ba0ae6595b110bd67e4f.jpg">
+<meta property="og:image" content="http://image.chanecho.com/api/img?path=/ad/336d1df32a494fb713f9dce00c328d.jpg">
+<meta property="og:image" content="http://image.chanecho.com/api/img?path=/fe/d239804df45b73f1ebf36f47610715.jpg">
+<meta property="og:image" content="http://image.chanecho.com/api/img?path=/b1/1cdb3a83d85d2d0ec84c68e2295689.jpg">
+<meta property="og:image" content="http://image.chanecho.com/api/img?path=/d2/1bccd9ee7900199ac4a3de805bb96d.jpg">
+<meta property="og:image" content="http://image.chanecho.com/api/img?path=/1f/c2ccb4c233411de1fdef8b4fb19e08.jpg">
+<meta property="article:published_time" content="2020-03-08T09:12:29.000Z">
+<meta property="article:modified_time" content="2020-04-19T02:35:54.491Z">
+<meta property="article:author" content="Mustom">
+<meta property="article:tag" content="位运算">
+<meta property="article:tag" content="位移运算">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://image.chanecho.com/api/img?path=/79/a24702bb65f3b59e8cf8eb06fc8ee5.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/08/位运算/"/>
+
+
+
+
+
+  <title>位运算和位移运算 | 轩然阁</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">轩然阁</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">人生如梦，想作就做</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/08/%E4%BD%8D%E8%BF%90%E7%AE%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mustom">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/nlp.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="轩然阁">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">位运算和位移运算</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-08T17:12:29+08:00">
+                2020-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2020/03/08/%E4%BD%8D%E8%BF%90%E7%AE%97/" class="leancloud_visitors" data-flag-title="位运算和位移运算">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.8k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>本文主要介绍在位运算和位移运算的基本概念，涉及到的编程语言为<code>Java</code>。</p>
+<a id="more"></a>
+
+<hr>
+<h3 id="十进制和二进制"><a href="#十进制和二进制" class="headerlink" title="十进制和二进制"></a>十进制和二进制</h3><p>计算机看似能干很多活，其实也很苯，只认识0和1。因为电路的逻辑只有0和1两个状态，这里的0和1并不是数字的0和1，0和1是表示两种不同的状态，0表示低电平，1表示高电平。计算机是由无数个逻辑电路组成的，通过0和1的无限位数和组合来表达信息。也就是说，计算机是采用二进制来表示数据的。</p>
+<p>下面先说一下我们生活中常用的十进制：</p>
+<p><img src="http://image.chanecho.com/api/img?path=/79/a24702bb65f3b59e8cf8eb06fc8ee5.png" alt="smaple1"></p>
+<p>这是一个普通的十进制数 <strong>八十三万七千零五十六</strong>，可以有如下表示：</p>
+<p><img src="http://image.chanecho.com/api/img?path=/44/330dc90f95e612ac6d3d9d9beeae30.jpg" alt="smaple2"></p>
+<p>再来看看二进制：</p>
+<p><img src="http://image.chanecho.com/api/img?path=/33/c602251f35064521ba08ecdd6a8e24.png" alt="smaple3"></p>
+<p>这是一个二进制数 <strong>101011</strong>，可以做如下变换：</p>
+<p><img src="http://image.chanecho.com/api/img?path=/d2/d0c26fbbf62c445ab8ec4bdf432ab8.png" alt="smaple4"></p>
+<p>二进制和十进制一样，只不过把底数（幂）从 10 变成了 2，用十进制表示二进制里的 <strong>101011</strong> 就是 <strong>43</strong>。</p>
+<p>以 <strong>Java</strong> 为例。在 Java 中，<strong>int</strong> 类型在 Java 中是占 <strong>4 个字节，1 个字节 8 位</strong>，十进制 <strong>43</strong> 的二进制表示如下：</p>
+<p><img src="http://image.chanecho.com/api/img?path=/7f/de5d570d5f23480884fb81470a39ec.png" alt="smaple5"></p>
+<p>其中 </p>
+<ul>
+<li>每段为 1 个字节，一个字节是 8 位，首位表示符号位</li>
+<li>首位如果为 0 表示该数的十进制表示为正数，如果首位为 1 表示该数位负数。</li>
+</ul>
+<hr>
+<h3 id="原码、反码和补码"><a href="#原码、反码和补码" class="headerlink" title="原码、反码和补码"></a>原码、反码和补码</h3><p><strong>原码</strong>：正数的原码是本身，负数的原码是其正数的原码，并将最高位改为 1。</p>
+<p>例如 1，-1，转换为8位的二进制原码</p>
+<ul>
+<li>1 的原码码 = [0000 0001]</li>
+<li>-1 的原码 = [1000 0001]</li>
+</ul>
+<p><strong>反码</strong>：正数的反码是本身，负数的反码是正数的原码每个位置取反（做 非运算）。</p>
+<p>例如 1，-1 转换为 8 位的二进制反码</p>
+<ul>
+<li>1 的反码 = [0000 0001]</li>
+<li>-1 的反码 = [1111 1110]</li>
+</ul>
+<p><strong>补码</strong>：正数的补码是本身，负数的补码是先取其绝对值的反码，然后最后位+1。<strong>正常情况下，对计算机的俩个数进行加法运算，由于不知道符号，所以对其取补码后进行运算</strong>。例如：<strong>在 Java 中，负数是用补码来表示的，也就是其绝对值的反码加 1 得到的</strong>。</p>
+<p>例如 1，-1 转换为 8 位的二进制补码</p>
+<ul>
+<li>1 的补码= [0000 0001]</li>
+<li>-1 的补码 = [1111 1111]，</li>
+</ul>
+<p><em>注意</em>：<strong>已知一个数的补码求原码，就是对补码再求补码</strong></p>
+<hr>
+<h3 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h3><h4 id="与运算"><a href="#与运算" class="headerlink" title="与运算"></a>与运算</h4><p>与运算是将参与运算的两个二进制数按位依次排好，如果相同的二进制位都是1，则相应二进制位结果为1，其他位全都为 0。</p>
+<ul>
+<li>例如 <code>1 &amp; 2</code>，其中<code>&amp;</code> 符号代表与运算：</li>
+</ul>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">1 </span>    =&gt; [<span class="number">0000</span> <span class="number">0001</span>]</span><br><span class="line"><span class="symbol">2 </span>    =&gt; [<span class="number">0000</span> <span class="number">0010</span>]</span><br><span class="line"><span class="symbol">1 </span>&amp; <span class="number">2</span> =&gt; [<span class="number">0000</span> <span class="number">0000</span>] = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="或运算"><a href="#或运算" class="headerlink" title="或运算"></a>或运算</h4><p>与运算是将参与运算的两个二进制数按位依次排好，如果相同的二进制位中，只要有 1 个是 1，那么相应二进制位结果为 1，如果 2 个二进制位都是 0则表示 0。</p>
+<ul>
+<li>例如 <code>1 | 2</code>，其中<code>|</code> 符号代表或运算：</li>
+</ul>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">1 </span>    =&gt; [<span class="number">0000</span> <span class="number">0001</span>]</span><br><span class="line"><span class="symbol">2 </span>    =&gt; [<span class="number">0000</span> <span class="number">0010</span>]</span><br><span class="line"><span class="symbol">1 </span>| <span class="number">2</span> =&gt; [<span class="number">0000</span> <span class="number">0011</span>] = <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="非运算（取反运算）"><a href="#非运算（取反运算）" class="headerlink" title="非运算（取反运算）"></a>非运算（取反运算）</h4><p><strong>非运算</strong> 和 <strong>反码</strong> 是相同的操作。但是</p>
+<ul>
+<li>例如<code>~0</code>，其中<code>~</code>符号代表非运算：</li>
+</ul>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span>   =&gt;  [<span class="number">0000</span> <span class="number">0000</span>]</span><br><span class="line">~<span class="number">0</span>  =&gt;  [<span class="number">1111</span> <span class="number">1111</span>]（补码）</span><br><span class="line">    # 补码 进行除符号位其他取反加 <span class="number">1</span> 操作，可以得到其 原码</span><br><span class="line">    =&gt;  [<span class="number">1000</span> <span class="number">0001</span>] = <span class="number">-1</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="异或运算"><a href="#异或运算" class="headerlink" title="异或运算"></a>异或运算</h4><p>异或运算是将参与运算的两个二进制数按位依次排好，如果相同的二进制位都是 0 或者都是 1，那么相应二进制位结果为 0，否则为 1。</p>
+<ul>
+<li>例如<code>1 ^ 2</code>，其中<code>^</code>符号代表异或运算：</li>
+</ul>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">1 </span>    =&gt; [<span class="number">0000</span> <span class="number">0001</span>]</span><br><span class="line"><span class="symbol">2 </span>    =&gt; [<span class="number">0000</span> <span class="number">0010</span>]</span><br><span class="line"><span class="symbol">1 </span>^ <span class="number">2</span> =&gt; [<span class="number">0000</span> <span class="number">0011</span>] = <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="移位运算"><a href="#移位运算" class="headerlink" title="移位运算"></a>移位运算</h3><p>以下涉及语言皆为 <strong>Java</strong>。</p>
+<h4 id="左移运算符：-lt-lt"><a href="#左移运算符：-lt-lt" class="headerlink" title="左移运算符：&lt;&lt;"></a>左移运算符：&lt;&lt;</h4><p>先随便定义一个 int 类型的数，十进制的<code>value = 733183670</code>，转换成二进制在计算机中的表示如下：</p>
+<p><img src="http://image.chanecho.com/api/img?path=/9e/a83858a939ba0ae6595b110bd67e4f.jpg" alt="smaple6"></p>
+<p>value &lt;&lt; 1，左移 1 位：</p>
+<p><img src="http://image.chanecho.com/api/img?path=/c3/899c923900a0cac30c0e198d0dd689.jpg" alt="smaple7"></p>
+<p>左移 1 位后换算成十进制的值为：1466367340，刚好是 733183670 的两倍， 有些人在乘 2 操作时喜欢用左移运算符来替代，即：<code>value &lt;&lt; 1 = value * 2</code>。</p>
+<p>value &lt;&lt; 8，左移 8 位看一下：</p>
+<p><img src="http://image.chanecho.com/api/img?path=/d4/3bdaad17c22ea952b93a3c056893f7.jpg" alt="smaple8"></p>
+<p>左移 8 位后变成了十进制的值为：-1283541504，移动 8 位后，由于首位变成了 1，也就是说成了负数，在使用中要考虑变成负数的情况。</p>
+<p>根据这个规则，左移32位后，右边补上 32 个 0 值是不是就变成了十进制的 0 了？<strong>答案是NO，</strong>当 int 类型进行左移操作时，<strong>左移位数大于等于 32 位操作时，会先求余（%）后再进行左移操作。</strong>也就是说左移 32 位相当于不进行移位操作，左移 40 位相当于左移8位（40%32=8）。当long类型进行左移操作时，long类型在二进制中的体现是64位的，因此求余操作的基数也变成了64，也就是说左移64位相当于没有移位，左移72位相当于左移8位（72%64=8）。</p>
+<p><em>注意</em>：<strong>由于 double，float 在二进制中的表现比较特殊，因此不能来进行移位操作</strong></p>
+<p>综上所述：左移 &lt;&lt; 其实很简单，也就是说 <strong>丢弃左边指定位数，右边补0</strong>。</p>
+<h4 id="右移运算符：-gt-gt"><a href="#右移运算符：-gt-gt" class="headerlink" title="右移运算符：&gt;&gt;"></a>右移运算符：&gt;&gt;</h4><p>还是这个数：<strong>733183670</strong></p>
+<p><img src="http://image.chanecho.com/api/img?path=/9e/a83858a939ba0ae6595b110bd67e4f.jpg" alt="smaple9"></p>
+<p>value &gt;&gt; 1，右移 1 位：</p>
+<p><img src="http://image.chanecho.com/api/img?path=/ad/336d1df32a494fb713f9dce00c328d.jpg" alt="smaple10"></p>
+<p>右移 1 位后换算成十进制的值为：366591835，刚好是 733183670 的 1 半， 有些人在除 2 操作时喜欢用右移运算符来替代，即：<code>value &gt;&gt; 1 = value / 2</code>（自动向下取整）。</p>
+<p>value &gt;&gt; 8，右移 8 位看一下：</p>
+<p><img src="http://image.chanecho.com/api/img?path=/fe/d239804df45b73f1ebf36f47610715.jpg" alt="smaple11"></p>
+<p>和左移一样，int 类型移位大于等于 32 位时，long 类型大于等于 64 位时，会先做求余处理再移位处理，byte，short移位前会先转换为int类型（32位）再进行移位。以上是正数的移位，我们再来看看负数的右移运算，如图，负数int_value: -733183670 的二进制表现如下图：</p>
+<p><img src="http://image.chanecho.com/api/img?path=/b1/1cdb3a83d85d2d0ec84c68e2295689.jpg" alt="smaple12"></p>
+<p>int_value &gt;&gt; 8，右移 8 位：</p>
+<p><img src="http://image.chanecho.com/api/img?path=/d2/1bccd9ee7900199ac4a3de805bb96d.jpg" alt="smaple13"></p>
+<p>综上所述：右移运算符&gt;&gt;的运算规则也很简单，<strong>丢弃右边指定位数，左边补上符号位</strong>。</p>
+<h4 id="无符号右移运算符：-gt-gt-gt"><a href="#无符号右移运算符：-gt-gt-gt" class="headerlink" title="无符号右移运算符：&gt;&gt;&gt;"></a>无符号右移运算符：&gt;&gt;&gt;</h4><p>无符号右移运算符<code>&gt;&gt;&gt;</code>和右移运算符<code>&gt;&gt;</code>是一样的，只不过右移时左边是补上 <strong>符号位</strong>，而无符号右移运算符是补上 <strong>0</strong>，也就是说，对于正数移位来说等同于：<code>&gt;&gt;</code>，负数通过此移位运算符能移位成正数。</p>
+<p>以 int_value: -733183670 &gt;&gt;&gt; 8（无符号右移 8 位）为例来画一下图：</p>
+<p><img src="http://image.chanecho.com/api/img?path=/1f/c2ccb4c233411de1fdef8b4fb19e08.jpg" alt="smaple14"></p>
+<p>无符号右移运算符<code>&gt;&gt;&gt;</code>的运算规则也很简单，<strong>丢弃右边指定位数，左边补上0</strong>。</p>
+<hr>
+<p>参考链接：</p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/30108890" target="_blank" rel="noopener">Java 中的移位运算符</a></li>
+<li><a href="https://www.jianshu.com/p/67baa55d75ea" target="_blank" rel="noopener">Java 运算符</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" rel="tag"># 位运算</a>
+          
+            <a href="/tags/%E4%BD%8D%E7%A7%BB%E8%BF%90%E7%AE%97/" rel="tag"># 位移运算</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/08/Docker%E5%AE%89%E8%A3%85/" rel="next" title="安装docker">
+                <i class="fa fa-chevron-left"></i> 安装docker
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/08/Docker%E9%94%99%E8%AF%AF%E9%9B%86%E9%94%A6%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" rel="prev" title="Docker错误集锦及解决方法">
+                Docker错误集锦及解决方法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div id="gitalk-container"></div>
+
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/nlp.jpg"
+                alt="Mustom" />
+            
+              <p class="site-author-name" itemprop="name">Mustom</p>
+              <p class="site-description motion-element" itemprop="description">NLP Engineer</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/lswjkllc" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:lswjkllc@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#十进制和二进制"><span class="nav-number">2.</span> <span class="nav-text">十进制和二进制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原码、反码和补码"><span class="nav-number">3.</span> <span class="nav-text">原码、反码和补码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#位运算"><span class="nav-number">4.</span> <span class="nav-text">位运算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#与运算"><span class="nav-number">4.1.</span> <span class="nav-text">与运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#或运算"><span class="nav-number">4.2.</span> <span class="nav-text">或运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非运算（取反运算）"><span class="nav-number">4.3.</span> <span class="nav-text">非运算（取反运算）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异或运算"><span class="nav-number">4.4.</span> <span class="nav-text">异或运算</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移位运算"><span class="nav-number">5.</span> <span class="nav-text">移位运算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#左移运算符：-lt-lt"><span class="nav-number">5.1.</span> <span class="nav-text">左移运算符：&lt;&lt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#右移运算符：-gt-gt"><span class="nav-number">5.2.</span> <span class="nav-text">右移运算符：&gt;&gt;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#无符号右移运算符：-gt-gt-gt"><span class="nav-number">5.3.</span> <span class="nav-text">无符号右移运算符：&gt;&gt;&gt;</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+      <!-- tag cloud config -->
+      
+        <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+        <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+        <div class="widget-wrap">
+          <h3 class="widget-title">标签云</h3>
+          <div id="myCanvasContainer" class="widget tagcloud">
+            <canvas width="250" height="250" id="resCanvas" style="width=100%">
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node/" rel="tag">Node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pytorch/" rel="tag">Pytorch</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BD%8D%E7%A7%BB%E8%BF%90%E7%AE%97/" rel="tag">位移运算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" rel="tag">位运算</a><span class="tag-list-count">1</span></li></ul>
+            </canvas>
+          </div>
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mustom</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="/js/src/md5.min.js"></script>
+  <script type="text/javascript">
+      var gitalk = new Gitalk({
+          clientID: '8eae867c2152810e2afa',
+          clientSecret: '5efc998c58cf700888b7213f52c1c44efb548d5a',
+          repo: 'lswjkllc.github.io',
+          owner: 'lswjkllc',
+          admin: ['lswjkllc'],
+          id: md5(window.location.pathname),
+          distractionFreeMode: 'true'
+      })
+      gitalk.render('gitalk-container')
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("hGx3nMXWeYxp5mkVdznNHFno-gzGzoHsz", "BBynfi699AcLCw7uMYwHInQa");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
+
+  
+
+
+  
+
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+  <!-- 代码块复制功能 -->
+  <script type="text/javascript" src="/js/src/clipboard.min.js"></script>
+  <script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
